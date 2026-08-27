@@ -2,14 +2,25 @@ import { z } from "zod";
 import { useAuth } from "@/hooks/useAuth";
 import { Form } from "@/components/forms/Form";
 import { Input } from "@/components/forms/Input";
+import type { RegisterData } from "@/types/user";
 
 const registerSchema = z
   .object({
-    email: z.string("Email is required").email("Invalid email"),
+    email: z.email("Invalid email"),
     password: z
-      .string("Password is required")
-      .min(6, "Password must be at least 6 characters long"),
-    confirmPassword: z.string(),
+      .string()
+      .min(6, "Password must be at least 6 characters long")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[0-9]/, "Password must contain at least one digit"),
+    confirmPassword: z
+      .string()
+      .min(6, "Password confirmation must be at least 6 characters long"),
+    profile: z
+      .object({
+        firstName: z.string().optional(),
+        lastName: z.string().optional(),
+      })
+      .optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
@@ -21,19 +32,22 @@ type RegisterFormData = z.infer<typeof registerSchema>;
 export function RegisterForm() {
   const { register } = useAuth();
 
-  const handleSubmit = async ({
-    email,
-    password,
-    confirmPassword,
-  }: RegisterFormData) => {
-    await register({ email, password, confirmPassword });
+  const handleSubmit = async (data: RegisterFormData) => {
+    const { confirmPassword, ...registerData } = data; // eslint-disable-line @typescript-eslint/no-unused-vars
+    await register(registerData as RegisterData);
   };
+
   return (
     <div className="max-w-100 mx-auto p-8">
       <h2>Register</h2>
 
       <Form<RegisterFormData>
-        initialValues={{ email: "", password: "", confirmPassword: "" }}
+        initialValues={{
+          email: "",
+          password: "",
+          confirmPassword: "",
+          profile: { firstName: "", lastName: "" },
+        }}
         onSubmit={handleSubmit}
         validationSchema={registerSchema}
       >
@@ -66,6 +80,27 @@ export function RegisterForm() {
               value={values.confirmPassword}
               error={errors.confirmPassword}
               onChange={handleChange}
+              placeholder="Confirm password"
+            />
+
+            <h3>Personal Information (optional)</h3>
+
+            <Input
+              label="First Name"
+              field="profile.firstName"
+              type="text"
+              value={values.profile?.firstName || ""}
+              onChange={handleChange}
+              placeholder="Enter your first name"
+            />
+
+            <Input
+              label="Last Name"
+              field="profile.lastName"
+              type="text"
+              value={values.profile?.lastName || ""}
+              onChange={handleChange}
+              placeholder="Enter your last name"
             />
           </>
         )}
