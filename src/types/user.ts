@@ -20,7 +20,7 @@ export type RegisterData = StrictOmit<
   "id" | "createdAt" | "lastLogin" | "role"
 > & {
   confirmPassword: string;
-  role: "user";
+  role?: "user";
 };
 
 export type PublicUser = Omit<User, "password">;

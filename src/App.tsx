@@ -1,3 +1,10 @@
+import { RegisterForm } from "./components/auth/RegisterForm";
+import { AuthProvider } from "./contexts/AuthContext";
+
 export function App() {
-  return <div>App</div>;
+  return (
+    <AuthProvider>
+      <RegisterForm />
+    </AuthProvider>
+  );
 }
