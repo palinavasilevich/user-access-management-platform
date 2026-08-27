@@ -1,5 +1,5 @@
 export interface Entity {
-  readonly id: number;
+  readonly id: string;
   createdAt?: Date;
   updatedAt?: Date;
   lastLogin?: Date;
