@@ -42,7 +42,7 @@ export function Input<T extends FormValues, K extends keyof T>({
   };
 
   return (
-    <div className={cn("mb-4", disabled ? "opacity-60" : "opacity-1")}>
+    <div className={cn("mb-4", disabled ? "opacity-60" : "opacity-100")}>
       <label className="block mb-2 font-medium">
         {label}
         {required && <span className="ml-1 text-[#dc3545]">*</span>}
@@ -56,7 +56,7 @@ export function Input<T extends FormValues, K extends keyof T>({
         disabled={disabled}
         required={required}
         className={cn(
-          "w-full p-2 rounded-sm text-base border",
+          "w-full p-2 rounded-lg text-base border",
           error ? "border-[#dc3545]" : "border-[#ced4da]",
           disabled && "bg-[#e9ecef] cursor-not-allowed",
         )}

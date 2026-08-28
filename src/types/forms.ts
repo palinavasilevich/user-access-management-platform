@@ -26,4 +26,5 @@ export interface FormProps<T extends FormValues> {
   onSubmit: (data: T) => Promise<void>;
   validationSchema?: z.ZodSchema<T>;
   children: ReactNode | ((props: FormRenderProps<T>) => ReactNode);
+  submitLabel?: string;
 }
