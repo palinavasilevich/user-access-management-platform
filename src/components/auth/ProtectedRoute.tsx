@@ -1,4 +1,4 @@
-import React from "react";
+import { type ReactNode } from "react";
 import { Navigate } from "react-router";
 import { useAuth } from "@/hooks/useAuth";
 import type { Permission, Role } from "@/types/permissions";
@@ -10,7 +10,7 @@ type ProtectionMode =
   | { type: "permission"; permission: Permission };
 
 interface ProtectedRouteProps {
-  children: React.ReactNode;
+  children: ReactNode;
   protection?: ProtectionMode;
   fallbackPath?: string;
 }

@@ -4,6 +4,9 @@ import "./index.css";
 import { RouterProvider } from "react-router";
 import { router } from "./app/router.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
+import { initializeData } from "./utils/seed.ts";
+
+initializeData();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

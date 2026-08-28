@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, type ReactNode } from "react";
 import type { PublicUser, RegisterData } from "@/types/user";
 import type { Permission } from "@/types/permissions";
 import { hasPermission } from "@/types/permissions";
@@ -17,7 +17,7 @@ export interface AuthContextType {
 }
 
 interface AuthProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
