@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { isAdmin, isManager } from "@/utils/roleGuards";
+import { getGreeting } from "@/utils/greeting";
 
 export function DashboardPage() {
   const { user, hasPermission } = useAuth();
@@ -10,7 +11,7 @@ export function DashboardPage() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            Welcome, {user?.profile?.firstName || user?.email}!
+            {getGreeting()}, {user?.profile?.firstName || user?.email}!
           </h1>
 
           <p className="mt-2 text-sm text-gray-500">
