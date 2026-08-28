@@ -1,7 +1,14 @@
 import { createBrowserRouter } from "react-router";
-import { ROUTES } from "@/constants/routes";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { AdminPage, DashboardPage, LoginPage, RegisterPage } from "@/pages";
+import { AdminRoute, ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { ROUTES } from "@/constants/routes";
+import {
+  AdminPage,
+  DashboardPage,
+  LoginPage,
+  RegisterPage,
+  UnauthorizedPage,
+} from "@/pages";
 
 export const router = createBrowserRouter([
   {
@@ -10,12 +17,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: DashboardPage,
+        element: (
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        ),
       },
-
       {
-        path: ROUTES.ADMIN,
-        Component: AdminPage,
+        path: "admin",
+        element: (
+          <AdminRoute>
+            <AdminPage />
+          </AdminRoute>
+        ),
       },
     ],
   },
@@ -24,9 +38,12 @@ export const router = createBrowserRouter([
     path: ROUTES.LOGIN,
     Component: LoginPage,
   },
-
   {
     path: ROUTES.REGISTER,
     Component: RegisterPage,
+  },
+  {
+    path: ROUTES.UNAUTHORIZED,
+    Component: UnauthorizedPage,
   },
 ]);
