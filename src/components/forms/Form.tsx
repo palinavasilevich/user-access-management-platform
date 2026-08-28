@@ -17,18 +17,22 @@ export function Form<T extends FormValues>({
   const renderStatus = () => {
     switch (formState.status) {
       case "loading":
-        return <p className="mt-4 text-sm text-gray-500">Loading...</p>;
+        return (
+          <p className="mt-4 text-sm font-medium text-center text-gray-500">
+            Loading...
+          </p>
+        );
 
       case "success":
         return (
-          <p className="mt-4 text-sm font-medium text-green-600">
+          <p className="mt-4 text-sm font-medium text-center text-green-600">
             Successfully sent!
           </p>
         );
 
       case "error":
         return (
-          <p className="mt-4 text-sm font-medium text-red-600">
+          <p className="mt-4 text-sm font-medium text-center text-red-600">
             Error: {formState.error}
           </p>
         );

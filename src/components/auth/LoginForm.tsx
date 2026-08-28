@@ -22,7 +22,7 @@ export function LoginForm() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-        <div className="mb-8 text-center">
+        <div className="mb-5 text-center">
           <h2 className="text-2xl font-semibold tracking-tight text-gray-900">
             Welcome back
           </h2>
