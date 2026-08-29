@@ -15,7 +15,7 @@ export function DashboardPage() {
           </h1>
 
           <p className="mt-2 text-sm text-gray-500">
-            Here’s an overview of what you can do.
+            Here's an overview of what you can do.
           </p>
 
           <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5">

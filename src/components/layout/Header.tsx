@@ -33,12 +33,21 @@ export function Header() {
                   Admin panel
                 </Link>
               )}
+
+              {user && (
+                <Link
+                  to={`/profile/${user.id}`}
+                  className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+                >
+                  Profile
+                </Link>
+              )}
             </div>
           </nav>
         </div>
 
         <div className="flex items-center gap-4">
-          {user && (
+          {user ? (
             <>
               <span className="hidden text-sm text-gray-600 sm:block">
                 {user.profile?.firstName || user.email}
@@ -57,6 +66,21 @@ export function Header() {
               >
                 Logout
               </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to={ROUTES.LOGIN}
+                className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+              >
+                Sign in
+              </Link>
+              <Link
+                to={ROUTES.REGISTER}
+                className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+              >
+                Sign up
+              </Link>
             </>
           )}
         </div>

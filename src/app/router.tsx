@@ -9,6 +9,7 @@ import {
   RegisterPage,
   UnauthorizedPage,
 } from "@/pages";
+import { ProfilePage } from "@/pages/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <DashboardPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/profile/:id?",
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
           </ProtectedRoute>
         ),
       },

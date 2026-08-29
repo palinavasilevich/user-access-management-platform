@@ -40,7 +40,7 @@ export const authApi = {
     return apiGet<User>(USERS_KEY);
   },
 
-  async put(
+  async update(
     id: string,
     data: Partial<Omit<User, "id" | "createdAt">>,
   ): Promise<User | null> {
@@ -59,12 +59,5 @@ export const authApi = {
     }
 
     return apiDelete(USERS_KEY, id);
-  },
-
-  async update(
-    id: string,
-    data: Partial<Omit<User, "id" | "createdAt">>,
-  ): Promise<User | null> {
-    return this.put(id, data);
   },
 };
