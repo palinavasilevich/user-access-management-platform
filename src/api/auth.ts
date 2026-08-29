@@ -3,6 +3,8 @@ import type { User, RegisterData } from "@/types/user";
 
 const USERS_KEY = "users";
 
+type UserUpdateData = Partial<Omit<User, "id" | "createdAt">>;
+
 export const authApi = {
   async login(email: string, password: string): Promise<User | null> {
     const users = await apiGet<User>(USERS_KEY);
@@ -40,11 +42,24 @@ export const authApi = {
     return apiGet<User>(USERS_KEY);
   },
 
-  async update(
-    id: string,
-    data: Partial<Omit<User, "id" | "createdAt">>,
-  ): Promise<User | null> {
-    return apiPut<User>(USERS_KEY, id, data);
+  async update(id: string, data: UserUpdateData): Promise<User | null> {
+    const [user] = await apiGet<User>(USERS_KEY, id);
+
+    if (!user) {
+      return null;
+    }
+
+    const updatedData: UserUpdateData = {
+      ...data,
+      ...(data.profile && {
+        profile: {
+          ...user.profile,
+          ...data.profile,
+        },
+      }),
+    };
+
+    return apiPut<User>(USERS_KEY, id, updatedData);
   },
 
   async delete(id: string): Promise<boolean> {

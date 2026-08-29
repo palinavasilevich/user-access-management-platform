@@ -41,10 +41,17 @@ export async function apiPut<T extends Entity>(
   const items = await apiGet<T>(storageKey);
   const index = items.findIndex((item) => item.id === id);
 
-  if (index === -1) return null;
+  if (index === -1) {
+    return null;
+  }
 
-  const updatedItem = { ...items[index], ...data };
+  const updatedItem = {
+    ...items[index],
+    ...data,
+  };
+
   items[index] = updatedItem;
+
   localStorage.setItem(storageKey, JSON.stringify(items));
 
   return updatedItem;
