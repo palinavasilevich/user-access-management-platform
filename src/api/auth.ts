@@ -75,4 +75,24 @@ export const authApi = {
 
     return apiDelete(USERS_KEY, id);
   },
+
+  async changePassword(
+    userId: string,
+    currentPassword: string,
+    newPassword: string,
+  ): Promise<User | null> {
+    const user = await this.getCurrentUser(userId);
+
+    if (!user) {
+      throw new Error("User not found.");
+    }
+
+    if (user.password !== currentPassword) {
+      throw new Error("Invalid current password.");
+    }
+
+    return this.update(userId, {
+      password: newPassword,
+    });
+  },
 };
